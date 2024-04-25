@@ -17,15 +17,33 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool isWalking = _animator.GetBool("isWalking");
+        bool forwardPressed = Input.GetKey("w");
+        
+
         if (Input.GetKeyDown(KeyCode.R)) 
         { 
             _release = !_release;
             _animator.SetBool("release", _release);
+            
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
             _ubiubi = !_ubiubi;
-            _animator.SetBool("ubiubi", _ubiubi);
+            _animator.SetBool("ubiubi", _ubiubi);            
         }
+        if (!_ubiubi)
+        {
+            _ubiubi = false;
+        }
+        if (!isWalking && forwardPressed)
+        {
+            _animator.SetBool("isWalking", true);
+        }
+        if (isWalking && !forwardPressed)
+        {
+            _animator.SetBool("isWalking", false);
+        }
+
     }
 }
